@@ -1,11 +1,10 @@
 // A basic Discord bot coded by Wout Vandenbogaerde. || The main motivation for this bot is learning javascript and node.js 
 const Discord = require("discord.js");
 const prefix = '!';
-console.log("\nBot Created by Wout Vandenbogaerde\n");
 console.log("\nPREFIX:\n" + settings.prefix);
 const bot = new Discord.Client({disableEveryone: true});
 
-var words = [
+var res = [
 	"Yes",
 	"No",
 	"Maybe",
@@ -28,7 +27,8 @@ bot.on ("ready", async () => {
 
 bot.on("message", async message => {
 	if(message.author.bot) return;
-	if(message.channel.type === "dm") return message.channel.send("I don't respond to DM's");
+	if(message.channel.type === "dm") return;
+	
 	let messageArray = message.content.split(" ");
 	let command = messageArray[0];
 	let args = messageArray.slice(1);
@@ -42,7 +42,7 @@ if(com === `${prefix}8ball`) {
 	}
 		let embed = new Discord.RichEmbed()
 		.addField("Question", args)
-		.addField("Answer", (words[Math.floor(Math.random() * words.length)]))
+		.addField("Answer", (res[Math.floor(Math.random() * res.length)]))
 		.setColor('42c2f4')
 		message.channel.send(embed)
 		return console.log(`> 8ball command used by ${message.author.username}`);
