@@ -52,6 +52,7 @@ if(com === `${prefix}8ball`) {
 		.setColor('42c2f4')
 		message.channel.send(embed)
 		return console.log(`> 8ball command used by ${message.author.username}`);
+	// Displays a message in the console if the command was used
 	}
 })
 
