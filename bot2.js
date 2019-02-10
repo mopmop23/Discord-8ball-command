@@ -1,9 +1,10 @@
-// A basic Discord bot coded by Wout Vandenbogaerde. || The main motivation for this bot is learning javascript and node.js 
+
 const Discord = require("discord.js");
 const prefix = '!';
 console.log("\nPREFIX:\n" + settings.prefix);
 const bot = new Discord.Client({disableEveryone: true});
 
+// Answers array
 var res = [
 	"Yes",
 	"No",
@@ -14,7 +15,8 @@ var res = [
 
 bot.on ("ready", async () => {
 	console.log('\nReady!\n');
-
+	
+	// Generate invite for bot
 	bot.generateInvite(["ADMINISTRATOR"]).then(link => {
 		console.log("\nINVITE BOT:\n" + link);
 	}).catch(err => {
@@ -26,6 +28,7 @@ bot.on ("ready", async () => {
 });
 
 bot.on("message", async message => {
+	// Checking if the author of the message is not a bot and is not sent in a DM channel
 	if(message.author.bot) return;
 	if(message.channel.type === "dm") return;
 	
@@ -36,10 +39,13 @@ bot.on("message", async message => {
 	var sender = message.author;
 
 if(com === `${prefix}8ball`) {
+	
+	// Runs if user doesn't ask a question
 	if(!args[0]){
 		message.channel.send('Please ask a question.')
 		return;
 	}
+	// Creates an ambed and picks a random answer from the answer array
 		let embed = new Discord.RichEmbed()
 		.addField("Question", args)
 		.addField("Answer", (res[Math.floor(Math.random() * res.length)]))
